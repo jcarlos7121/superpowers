@@ -133,13 +133,15 @@ If you find issues, fix them inline. No need to re-review — just fix and move 
 
 ## Execution Handoff
 
-After saving the plan, offer execution choice:
+After saving the plan, check for team support and offer execution choice:
 
 **"Plan complete and saved to `docs/superpowers/plans/<filename>.md`. Two execution options:**
 
 **1. Subagent-Driven (recommended)** - I dispatch a fresh subagent per task, review between tasks, fast iteration
 
 **2. Inline Execution** - Execute tasks in this session using executing-plans, batch execution with checkpoints
+
+**3. Team-Based (parallel, this session)** *(only if TeamCreate is available)* - Spawn an agent team with parallel implementers and reviewers, coordinated via shared task list
 
 **Which approach?"**
 
@@ -150,3 +152,12 @@ After saving the plan, offer execution choice:
 **If Inline Execution chosen:**
 - **REQUIRED SUB-SKILL:** Use superpowers:executing-plans
 - Batch execution with checkpoints for review
+**If Parallel Session chosen:**
+- Guide them to open new session in worktree
+- **REQUIRED SUB-SKILL:** New session uses superpowers:executing-plans
+
+**If Team-Based chosen:**
+- **REQUIRED SUB-SKILL:** Use superpowers:subagent-driven-development (team mode)
+- Stay in this session
+- `TeamCreate` to spawn parallel implementers
+- Shared `TaskList` for coordination
